@@ -1,7 +1,7 @@
 package com.collins.backend.utils;
 
 public class FeedBackMessages {
-    public static final String USER_SUCCESS = "Resource Has Been Registered Successfully";
+    public static final String CREATE_SUCCESS = "Resource Has Been Registered Successfully";
     public static final String UPDATE_SUCCESS = "Resource Has Been Updated Successfully";
     public static final String DELETE_SUCCESS = "Resource Has Been Deleted Successfully";
     public static final String FOUND_SUCCESS = "Resource Found Successfully";
