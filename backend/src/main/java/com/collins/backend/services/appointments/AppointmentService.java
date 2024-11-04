@@ -1,15 +1,18 @@
 package com.collins.backend.services.appointments;
 
 import com.collins.backend.entities.Appointment;
+import com.collins.backend.entities.Pet;
 import com.collins.backend.entities.User;
 import com.collins.backend.entities.enums.AppointmentStatus;
 import com.collins.backend.exceptions.ResourceNotFoundException;
 import com.collins.backend.payloads.requests.AppointmentUpdateRequest;
+import com.collins.backend.payloads.requests.BookAppointmentRequest;
 import com.collins.backend.repositories.AppointmentRepository;
 import com.collins.backend.repositories.UserRepository;
-import com.collins.backend.utils.FeedBackMessages;
+import com.collins.backend.services.pets.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,12 +29,21 @@ public class AppointmentService implements AppointmentServiceImpl{
 
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
+    private final PetService petService;
 
+    @Transactional
     @Override
-    public Appointment createAppointment(Appointment appointment, Long senderId, Long recipientId)  {
+    public Appointment createAppointment(BookAppointmentRequest request, Long senderId, Long recipientId)  {
         Optional<User> sender = userRepository.findById(senderId);
         Optional<User> recipient = userRepository.findById(recipientId);
         if(sender.isPresent() && recipient.isPresent()) {
+
+            Appointment appointment = request.getAppointment();
+            List<Pet> pets = request.getPets();
+;            pets.forEach(pet -> pet.setAppointment(appointment));
+            List<Pet> savedPets = petService.savePetsForAppointment(pets);
+            appointment.setPets(savedPets);
+
             appointment.addPatient(sender.get());
             appointment.addVeterinarian(recipient.get());
             appointment.setAppointmentNo();

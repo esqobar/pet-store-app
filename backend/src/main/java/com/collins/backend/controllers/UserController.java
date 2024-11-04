@@ -2,7 +2,6 @@ package com.collins.backend.controllers;
 
 import com.collins.backend.dtos.EntityConverter;
 import com.collins.backend.dtos.UserDto;
-import com.collins.backend.entities.Appointment;
 import com.collins.backend.entities.User;
 import com.collins.backend.exceptions.ResourceNotFoundException;
 import com.collins.backend.exceptions.UserAlreadyExistsException;
@@ -32,7 +31,7 @@ public class UserController {
         try {
             User newUser = userService.register(request);
             UserDto registerNewUser = entityConverter.mapEntityToDto(newUser, UserDto.class);
-            return ResponseEntity.ok(new ApiResponse(USER_SUCCESS,registerNewUser));
+            return ResponseEntity.ok(new ApiResponse(CREATE_SUCCESS,registerNewUser));
         } catch (UserAlreadyExistsException e) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse(e.getMessage(), null));
         } catch (Exception e) {

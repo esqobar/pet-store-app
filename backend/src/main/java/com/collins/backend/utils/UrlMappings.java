@@ -1,7 +1,7 @@
 package com.collins.backend.utils;
 
 public class UrlMappings {
-    //    =========================== Start Api Users ===============================
+    /*============================ Start Api Users ===================================*/
     public static final String API = "/api/v1";
     public static final String USERS_API = API+"/users";
     public static final String NEW_USER = "/register";
@@ -10,7 +10,7 @@ public class UrlMappings {
     public static final String USER_BY_ID = "/user/{userId}";
     public static final String ALL_USERS = "/all";
 
-    //    =========================== Start Api Appointments ===============================
+    /*============================ Start Api Appointments ===================================*/
     public static final String APPOINTMENTS_API = API+"/appointments";
     public static final String ALL_APPOINTMENTS = "/all";
     public static final String NEW_APPOINTMENT = "/book-appointment";
@@ -19,5 +19,10 @@ public class UrlMappings {
     public static final String APPOINTMENT_BY_ID = "/appointment/{id}";
     public static final String APPOINTMENT_BY_NO = "/appointmentNo/{appointmentNo}";
 
-    //    =========================== Start Api Pets ===============================
+    /*============================ Start Pet API ===================================*/
+    public static final String PETS_API =API+"/pets" ;
+    public static final String SAVE_PETS_FOR_APPOINTMENT ="/save-pets" ;
+    public static final String PET_BY_ID = "/pet/{petId}" ;
+    public static final String DELETE_PET = "/delete/{petId}" ;
+    public static final String UPDATE_PET = "/update/{petId}" ;
 }

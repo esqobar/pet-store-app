@@ -3,6 +3,7 @@ package com.collins.backend.controllers;
 import com.collins.backend.entities.Appointment;
 import com.collins.backend.exceptions.ResourceNotFoundException;
 import com.collins.backend.payloads.requests.AppointmentUpdateRequest;
+import com.collins.backend.payloads.requests.BookAppointmentRequest;
 import com.collins.backend.payloads.responses.ApiResponse;
 import com.collins.backend.services.appointments.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +34,11 @@ public class AppointmentController {
     }
 
     @PostMapping(NEW_APPOINTMENT)
-    public ResponseEntity<ApiResponse> bookAppointment(@RequestBody Appointment appointment,
+    public ResponseEntity<ApiResponse> bookAppointment(@RequestBody BookAppointmentRequest request,
                                                         @RequestParam Long senderId,
                                                         @RequestParam Long recipientId) {
         try {
-            Appointment newAppointment = appointmentService.createAppointment(appointment, senderId, recipientId);
+            Appointment newAppointment = appointmentService.createAppointment(request, senderId, recipientId);
             return ResponseEntity.ok(new ApiResponse(APPOINTMENT_SUCCESS, newAppointment));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
