@@ -25,4 +25,11 @@ public class UrlMappings {
     public static final String PET_BY_ID = "/pet/{petId}" ;
     public static final String DELETE_PET = "/delete/{petId}" ;
     public static final String UPDATE_PET = "/update/{petId}" ;
+
+    /*============================ Start Pet API ===================================*/
+    public static final String PHOTOS_API =API+"/photos" ;
+    public static final String PHOTO_UPLOAD ="/upload" ;
+    public static final String PHOTO_BY_ID = "/photo/{imageId}" ;
+    public static final String DELETE_PHOTO = "/delete/{imageId}/user/{userId}" ;
+    public static final String UPDATE_PHOTO = "/update/{imageId}" ;
 }

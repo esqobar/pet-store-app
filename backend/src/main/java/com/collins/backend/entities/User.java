@@ -39,4 +39,13 @@ public class User {
 
     @Transient
     List<Appointment> appointments;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Photo photo;
+
+    public void removeUserPhoto(){
+        if(this.getPhoto() != null){
+            this.setPhoto(null);
+        }
+    }
 }
