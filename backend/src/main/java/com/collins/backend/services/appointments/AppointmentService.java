@@ -1,5 +1,8 @@
 package com.collins.backend.services.appointments;
 
+import com.collins.backend.dtos.AppointmentDto;
+import com.collins.backend.dtos.EntityConverter;
+import com.collins.backend.dtos.PetDto;
 import com.collins.backend.entities.Appointment;
 import com.collins.backend.entities.Pet;
 import com.collins.backend.entities.User;
@@ -11,6 +14,7 @@ import com.collins.backend.repositories.AppointmentRepository;
 import com.collins.backend.repositories.UserRepository;
 import com.collins.backend.services.pets.PetService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +34,9 @@ public class AppointmentService implements AppointmentServiceImpl{
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
     private final PetService petService;
+    private final EntityConverter<Appointment, AppointmentDto> entityConverter;
+    private final EntityConverter<Pet, PetDto> petEntityConverter;
+    private final ModelMapper modelMapper;
 
     @Transactional
     @Override
@@ -88,5 +95,18 @@ public class AppointmentService implements AppointmentServiceImpl{
     @Override
     public Appointment getAppointmentByNo(String appointmentNo) {
         return appointmentRepository.findByAppointmentNo(appointmentNo);
+    }
+
+    @Override
+    public List<AppointmentDto> getUserAppointments(Long userId) {
+        List<Appointment> appointments = appointmentRepository.findAllByUserId(userId);
+        return appointments.stream().map(appointment -> {
+                    AppointmentDto appointmentDto = entityConverter.mapEntityToDto(appointment, AppointmentDto.class);
+                    List<PetDto> petDtos = appointment.getPets()
+                                    .stream()
+                                    .map(pet -> petEntityConverter.mapEntityToDto(pet, PetDto.class)).toList();
+                    appointmentDto.setPets(petDtos);
+                    return appointmentDto;
+                }).toList();
     }
 }

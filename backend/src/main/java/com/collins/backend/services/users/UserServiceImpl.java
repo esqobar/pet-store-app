@@ -5,6 +5,7 @@ import com.collins.backend.entities.User;
 import com.collins.backend.payloads.requests.RegistrationRequest;
 import com.collins.backend.payloads.requests.UserUpdateRequest;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UserServiceImpl {
@@ -15,4 +16,6 @@ public interface UserServiceImpl {
     void delete(Long userId);
 
     List<UserDto> getAllUsers();
+
+    UserDto getUserWithDetails(Long userId) throws SQLException;
 }

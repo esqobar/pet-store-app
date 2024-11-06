@@ -52,15 +52,27 @@ public class UserController {
         }
     }
 
+//    @GetMapping(USER_BY_ID)
+//    public ResponseEntity<ApiResponse> findById(@PathVariable Long userId) {
+//        try {
+//            User user = userService.findById(userId);
+//            UserDto theUser = entityConverter.mapEntityToDto(user, UserDto.class);
+//            return ResponseEntity.status(OK).body(new ApiResponse(FOUND_SUCCESS, theUser));
+//        } catch (ResourceNotFoundException e) {
+//            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(), null));
+//        }
+//    }
+
     @GetMapping(USER_BY_ID)
     public ResponseEntity<ApiResponse> findById(@PathVariable Long userId) {
         try {
-            User user = userService.findById(userId);
-            UserDto theUser = entityConverter.mapEntityToDto(user, UserDto.class);
-            return ResponseEntity.status(OK).body(new ApiResponse(FOUND_SUCCESS, theUser));
-        } catch (ResourceNotFoundException e) {
+            UserDto userDto = userService.getUserWithDetails(userId);
+            return ResponseEntity.status(FOUND).body(new ApiResponse(FOUND_SUCCESS, userDto));
+        }catch (ResourceNotFoundException e){
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
-        } catch (Exception e) {
+        }catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(), null));
         }
     }
