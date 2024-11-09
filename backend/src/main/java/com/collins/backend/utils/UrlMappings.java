@@ -40,4 +40,9 @@ public class UrlMappings {
     public static final String DELETE_REVIEW = "/delete/{reviewId}";
     public static final String UPDATE_REVIEW = "/update/{reviewId}" ;
     public static final String AVG_RATING_FOR_VET = "/rating/{vetId}" ;
+
+    /*============================ Start Veterinarians API ===================================*/
+    public static final String VETERINARIANS_API =API+"/veterinarians";
+    public static final String ALL_VETERINARIANS ="/all";
+    public static final String SEARCH_VETERINARIANS_FOR_APPOINTMENT ="/search-veterinarian";
 }
