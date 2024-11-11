@@ -4,7 +4,6 @@ import com.collins.backend.entities.Pet;
 import com.collins.backend.exceptions.ResourceNotFoundException;
 import com.collins.backend.payloads.responses.ApiResponse;
 import com.collins.backend.services.pets.PetService;
-import com.collins.backend.utils.FeedBackMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -65,5 +64,20 @@ public class PetController {
         }catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage(), null));
         }
+    }
+
+    @GetMapping(PET_TYPES)
+    public ResponseEntity<ApiResponse> getAllPetTypes(){
+        return  ResponseEntity.ok(new ApiResponse(FOUND_SUCCESS, petService.getPetTypes()));
+    }
+
+    @GetMapping(PET_COLORS)
+    public ResponseEntity<ApiResponse> getAllPetColors(){
+        return  ResponseEntity.ok(new ApiResponse(FOUND_SUCCESS, petService.getPetColors()));
+    }
+
+    @GetMapping(PET_BREEDS)
+    public ResponseEntity<ApiResponse> getAllPetBreeds(@RequestParam String petType){
+        return  ResponseEntity.ok(new ApiResponse(FOUND_SUCCESS, petService.getPetBreeds(petType)));
     }
 }

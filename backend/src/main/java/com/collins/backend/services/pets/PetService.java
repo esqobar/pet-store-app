@@ -45,4 +45,19 @@ public class PetService implements PetServiceImpl{
                     throw new ResourceNotFoundException(RESOURCE_NOT_FOUND);
                 });
     }
+
+    @Override
+    public List<String> getPetTypes(){
+        return petRepository.getDistinctPetTypes();
+    }
+
+    @Override
+    public List<String> getPetColors(){
+        return petRepository.getDistinctPetColors();
+    }
+
+    @Override
+    public List<String> getPetBreeds(String petType){
+        return petRepository.getDistinctPetBreedsByPetType(petType);
+    }
 }

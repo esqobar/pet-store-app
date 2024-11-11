@@ -25,6 +25,9 @@ public class UrlMappings {
     public static final String PET_BY_ID = "/pet/{petId}" ;
     public static final String DELETE_PET = "/delete/{petId}" ;
     public static final String UPDATE_PET = "/update/{petId}" ;
+    public static final String PET_TYPES = "/get-types" ;
+    public static final String PET_COLORS = "/get-colors" ;
+    public static final String PET_BREEDS = "/get-breeds" ;
 
     /*============================ Start Photos API ===================================*/
     public static final String PHOTOS_API =API+"/photos" ;

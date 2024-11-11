@@ -20,7 +20,7 @@ const VeterinarianCard = ({ vet }) => {
                                 <h6>{vet.specialization}</h6>
                             </Card.Title>
                             <Card.Text className='review rating-stars'>Reviews: Some Stars</Card.Text>
-                            <Link to={''} className='link' >Book Appointment</Link>
+                            <Link to={`/book-appointment/${vet.id}/new-appointment`} className='link' >Book Appointment</Link>
                         </div>
                     </Accordion.Header>
                     <Accordion.Body>

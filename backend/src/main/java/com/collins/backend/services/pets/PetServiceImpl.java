@@ -9,4 +9,10 @@ public interface PetServiceImpl {
     Pet updatePet(Pet pet, Long petId);
     Pet getPetById(Long petId);
     void deletePet( Long petId);
+
+    List<String> getPetTypes();
+
+    List<String> getPetColors();
+
+    List<String> getPetBreeds(String petType);
 }
