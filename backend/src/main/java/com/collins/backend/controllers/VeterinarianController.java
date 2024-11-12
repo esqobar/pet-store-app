@@ -4,7 +4,6 @@ import com.collins.backend.dtos.UserDto;
 import com.collins.backend.payloads.responses.ApiResponse;
 import com.collins.backend.services.veterinarians.VeterinarianService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,6 @@ import java.util.List;
 import static com.collins.backend.utils.FeedBackMessages.*;
 import static com.collins.backend.utils.UrlMappings.*;
 import static org.springframework.http.HttpStatus.*;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestController
 @RequestMapping(VETERINARIANS_API)

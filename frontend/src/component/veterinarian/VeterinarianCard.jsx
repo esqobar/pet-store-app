@@ -1,7 +1,7 @@
-import {Accordion, Card, Col, Placeholder} from "react-bootstrap";
+import {Accordion, Card, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import placeholder from "../../assets/images/placeholder.jpg";
 import UserImage from "../common/UserImage.jsx";
+import RatingStars from "../ratings/RatingStars.jsx";
 
 const VeterinarianCard = ({ vet }) => {
     return (
@@ -11,7 +11,7 @@ const VeterinarianCard = ({ vet }) => {
                     <Accordion.Header>
                         <div className='d-flex align-items-center'>
                             <Link>
-                                <UserImage userId={vet.id} userPhoto={vet.photo} placeholder={placeholder} />
+                                <UserImage userId={vet.id} userPhoto={vet.photo} />
                             </Link>
                         </div>
                         <div className='flex-grow-1 ml-3 px-5'>
@@ -19,13 +19,13 @@ const VeterinarianCard = ({ vet }) => {
                             <Card.Title>
                                 <h6>{vet.specialization}</h6>
                             </Card.Title>
-                            <Card.Text className='review rating-stars'>Reviews: Some Stars</Card.Text>
+                            <Card.Text className='review rating-stars'>Reviews: <RatingStars rating={vet.averageRating} /> ({vet.totalReviewers}) </Card.Text>
                             <Link to={`/book-appointment/${vet.id}/new-appointment`} className='link' >Book Appointment</Link>
                         </div>
                     </Accordion.Header>
                     <Accordion.Body>
                         <div>
-                            <Link to={''} className='link-2'>See What People Are Saying About</Link>{" "}
+                            <Link to={`/veterinarian/${vet.id}/veterinarian` } className='link-2'>See What People Are Saying About</Link>{" "}
                             <span className='margin-left-safe'>Dr.{vet.firstName}</span>
                         </div>
                     </Accordion.Body>

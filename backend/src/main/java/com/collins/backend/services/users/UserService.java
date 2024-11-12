@@ -11,6 +11,7 @@ import com.collins.backend.factories.UserFactory;
 import com.collins.backend.payloads.requests.RegistrationRequest;
 import com.collins.backend.payloads.requests.UserUpdateRequest;
 import com.collins.backend.repositories.UserRepository;
+import com.collins.backend.repositories.ReviewRepository;
 import com.collins.backend.services.appointments.AppointmentService;
 import com.collins.backend.services.images.ImageService;
 import com.collins.backend.services.reviews.ReviewService;
@@ -33,6 +34,7 @@ public class UserService implements UserServiceImpl {
     private final AppointmentService appointmentService;
     private final ImageService imageService;
     private final ReviewService reviewService;
+    private final ReviewRepository reviewRepository;
 
 
     @Override
@@ -80,6 +82,7 @@ public class UserService implements UserServiceImpl {
 
         //2. converting the user to a UserDto
         UserDto userDto = entityConverter.mapEntityToDto(user, UserDto.class);
+        userDto.setTotalReviewers(reviewRepository.countByVeterinarianId(userId));
 
         //3. getting the user appointments ( users (patients and vets ) )
         setUserAppointment(userDto);
@@ -108,6 +111,7 @@ public class UserService implements UserServiceImpl {
                 .map(this::mapReviewToDto).toList();
         if(!reviewDto.isEmpty()) {
             double averageRating = reviewService.getAvgRatingForVet(userId);
+            userDto.setAverageRating(averageRating);
         }
         userDto.setReviews(reviewDto);
     }
